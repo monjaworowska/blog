@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch } from "react-router-dom";
 import Post from "./component/Post";
 import User from "./component/User";
+import Comment from "./component/Comment";
 
 const post = {
   userId: 1,
@@ -35,10 +36,21 @@ const user = {
   },
 };
 
+const comment = {
+  postId: 1,
+  id: 1,
+  name: "id labore ex et quam laborum",
+  email: "Eliseo@gardner.biz",
+  body:
+    "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+};
+
 const App = () => (
   <BrowserRouter>
     <div className="container mt-3">
       <div>
+        <Comment comment={comment} />
+        <br></br>
         <User user={user} />
         <br></br>
         <Post post={post} user={user} />

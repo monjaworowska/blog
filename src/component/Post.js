@@ -18,6 +18,7 @@ const Post = ({ post, user, details }) => {
         {!details
           ? post.body.slice(1, 50) + "..."
           : post.body.slice(1, post.body.length)}
+        .
       </p>
       <div className="card-footer">
         <p className="card-footer-item">
