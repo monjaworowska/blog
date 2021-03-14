@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch } from "react-router-dom";
 import Post from "./component/Post";
+import User from "./component/User";
 
 const post = {
   userId: 1,
@@ -36,11 +37,14 @@ const user = {
 
 const App = () => (
   <BrowserRouter>
-    <div className="container">
+    <div className="container mt-3">
       <div>
+        <User user={user} />
+        <br></br>
         <Post post={post} user={user} />
         <br></br>
         <Post post={post} user={user} details />
+        <br></br>
       </div>
     </div>
     <Switch>
