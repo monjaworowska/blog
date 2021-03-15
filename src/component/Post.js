@@ -1,33 +1,58 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
+import PostTemplate from "./PostTemplate";
+import Comment from "./Comment";
 
-const Post = ({ post, user, details }) => {
-  return (
-    <div className="card">
-      <div className="card-header">
-        <p className="card-header-title">
-          <span className="is-uppercase is-size-3">
-            {post.title.slice(0, 1)}
-          </span>
-          {!details
-            ? post.title.slice(1, 50) + "..."
-            : post.title.slice(1, post.title.length)}
-        </p>
-      </div>
-      <p className="card-content">
-        <span className="is-uppercase is-size-3">{post.body.slice(0, 1)}</span>
-        {!details
-          ? post.body.slice(1, 50) + "..."
-          : post.body.slice(1, post.body.length)}
-        .
-      </p>
-      <div className="card-footer">
-        <p className="card-footer-item">
-          <NavLink to={"/users/" + user.id + "/posts"}>By {user.name}</NavLink>
-        </p>
-        {details ? <p className="card-footer-item">{user.email}</p> : null}
-      </div>
-    </div>
-  );
-};
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts/";
+const USER_URL = "https://jsonplaceholder.typicode.com/users/";
+
+class Post extends React.Component {
+  state = {
+    id: this.props.id,
+    details: this.props.details,
+    post: [],
+    user: [],
+    comments: [],
+  };
+  componentDidMount() {
+    fetch(POSTS_URL + this.state.id).then((response) =>
+      response.json().then((data) => {
+        this.setState({ post: data });
+        fetch(USER_URL + this.state.post.userId).then((response) =>
+          response.json().then((data) => {
+            this.setState({ user: data });
+          })
+        );
+      })
+    );
+    if (this.state.details) {
+      fetch(POSTS_URL + this.state.id + "/comments").then((response) =>
+        response.json().then((data) => this.setState({ comments: data }))
+      );
+    }
+  }
+  render() {
+    const { post, user, comments, details } = this.state;
+    return (
+      <>
+        {details ? (
+          <div className="container mt-3">
+            <PostTemplate post={post} user={user} details={details} />
+            <div className="mt-4">
+              {comments.map((comment) => (
+                <Comment comment={comment} key={comment.id} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <NavLink to={"/post/" + post.id} className="column is-one-third">
+            <PostTemplate post={post} user={user} />
+          </NavLink>
+        )}
+      </>
+    );
+  }
+}
 
 export default Post;
+/**/

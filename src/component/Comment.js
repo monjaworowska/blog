@@ -2,7 +2,7 @@ const Comment = ({ comment }) => {
   return (
     <div className="card">
       <div className="card-header">
-        <p className="card-header-title notification is-danger">
+        <p className="card-header-title notification is-primary">
           By {comment.email}
         </p>
       </div>
