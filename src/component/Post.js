@@ -39,6 +39,9 @@ class Post extends React.Component {
           <div className="container mt-3">
             <PostTemplate post={post} user={user} details={details} />
             <div className="mt-4">
+              <div className="notification is-warning">
+                {comments.length} comments
+              </div>
               {comments.map((comment) => (
                 <Comment comment={comment} key={comment.id} />
               ))}

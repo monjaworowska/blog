@@ -28,9 +28,6 @@ const Nav = () => {
         <NavLink className="navbar-item" to="/users">
           Users
         </NavLink>
-        <NavLink className="navbar-item" to="/albums">
-          Albums
-        </NavLink>
       </div>
     </nav>
   );
