@@ -8,7 +8,7 @@ const UserPosts = (props) => {
   return (
     <div>
       <div className="notification is-info">Posts by {user}</div>
-      <List url={USER_POSTS_URL} />;
+      <List url={USER_POSTS_URL} type="posts" />
     </div>
   );
 };

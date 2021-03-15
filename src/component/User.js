@@ -4,19 +4,15 @@ const User = ({ user }) => {
   return (
     <div className="card">
       <div className="card-header">
-        <p className="card-header-title">{user.name}</p>
+        <p className="card-header-title">{user.username}</p>
       </div>
       <div className="card-footer">
         <p className="card-footer-item">{user.email}</p>
-        <p className="card-footer-item">{user.website}</p>{" "}
         <NavLink
           className="card-footer-item"
-          to={"/users/" + user.id + "/posts"}
+          to={"/" + user.id + "/" + user.username + "/posts"}
         >
-          {user.name + "'s"} posts
-        </NavLink>
-        <NavLink className="card-footer-item" to="/">
-          All posts
+          {user.username + "'s"} posts
         </NavLink>
       </div>
     </div>
